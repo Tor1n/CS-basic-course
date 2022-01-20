@@ -14,9 +14,12 @@ namespace mod2_task2
             double PointPrograming = 56.2;
             double PointMath = 26.8;
             double PointPhysics = 76.3;
-            double summ = (PointPrograming + PointMath + PointPhysics)/3;
+            double summ = PointPrograming + PointMath + PointPhysics;
 
-            Console.WriteLine($"Испытуемый: {FullName}\nСредняя оченка эффективности: {summ}");
+            double PointsAvarage = summ / 3;
+
+            Console.WriteLine($"Испытуемый: {FullName}\nСумма балов: {summ}\n" + 
+                              $"Средняя оченка эффективности: {PointsAvarage}");
             Console.WriteLine("\nДля просмотра детального отчета нажмите любую клавишу...");
             Console.ReadKey();
             Console.WriteLine("\nПрограммирование: {0}\nФизика: {1}\nМатематика: {2}", 
