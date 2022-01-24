@@ -27,6 +27,8 @@ namespace mod2_task2
                 PointPhysics, 
                 PointMath);
             Console.ReadKey();
+            
         }
+
     }
 }
