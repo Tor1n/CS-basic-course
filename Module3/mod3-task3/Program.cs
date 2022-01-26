@@ -4,37 +4,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mod3_task3
+namespace Task3
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Чтобы проверить является ли число простым, введите целое число:");
+            Console.WriteLine("Укажите цисло, чтобы определить простое ли оно: ");
             int number = int.Parse(Console.ReadLine());
-
+            int k = 2;
             bool condition = false;
-            while (number > 0)
-            {                
-                    for (int k = 2; k < number -1; k++)
-                    {
-                        if (number % k == 0)
-                        {
-                           condition = true;
-                           break;
-                         }
-                    Console.WriteLine($"k >>> {k}");
-                    }
-                
-            }
-
-            if (condition = true)
+            while (k < number)
             {
-                Console.WriteLine($"К сожалению число {number} не является простым");
+
+
+
+                if (number % k == 0)
+                {
+                    condition = true;
+                    break;
+
+                }
+                else
+                {
+                    k++;
+                    Console.WriteLine($"k сейчас:{k}");
+                }
+
+            }
+            if (condition == false)
+            {
+                Console.WriteLine("Число не является простым");
             }
             else
             {
-                Console.WriteLine("Ура! число простое");
+                Console.WriteLine("Число простое");
             }
             Console.ReadKey();
         }
