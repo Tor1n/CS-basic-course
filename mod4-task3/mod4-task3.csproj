@@ -7,7 +7,7 @@
     <ProjectGuid>{0389EBFE-8801-4F34-8017-CE5D3E9D9CE2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>mod4_task3</RootNamespace>
-    <AssemblyName>mod4_task3</AssemblyName>
+    <AssemblyName>mod4-task3</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
