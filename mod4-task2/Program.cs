@@ -19,12 +19,17 @@ namespace mod4_task2
             {
                 row[i] = int.Parse(Console.ReadLine());
             }
-            foreach (var item in row)
+         
+            int min = int.MaxValue;
+            for (int i = 0; i < row.Length; i++)
             {
-                Console.Write($"{item} ");
+                if (row[i] < min)
+                {
+                    min = row[i];
+                }
             }
-            int max = row.Max();
-            Console.Write($"Максимальное значение последовательности: {max}");
+
+            Console.Write($"Минимальное значение последовательности: {min}");
             Console.ReadKey();
         }
     }
