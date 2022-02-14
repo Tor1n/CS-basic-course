@@ -33,14 +33,12 @@ namespace mod4_task3
                 if (variant > secretnum)
 
                 {
-                    Console.WriteLine("Нет, загаданное число меньше");
-                    /*userinput = int.Parse(Console.ReadLine());*/
+                    Console.WriteLine("Нет, загаданное число меньше");                    
                 }
 
                 else if (variant < secretnum)
                 {
-                    Console.WriteLine("Нет, загаданное число больше");
-                    /*userinput = int.Parse(Console.ReadLine());*/
+                    Console.WriteLine("Нет, загаданное число больше");                    
                 }
                 else
                 {
