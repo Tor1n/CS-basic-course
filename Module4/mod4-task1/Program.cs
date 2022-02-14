@@ -24,7 +24,7 @@ namespace mod4_task1
             {
                 for (int j = 0; j < col; j++)
                 {
-                    matrix[i, j] = r.Next(10);
+                    matrix[i, j] = r.Next();
                     Console.Write($"{matrix[i, j]} ");
                     summ = summ + matrix[i, j];
                 }

@@ -16,26 +16,31 @@ namespace mod4_task3
             int secretnum = r.Next(maxvalue + 1);
             
             Console.WriteLine($"Теперь отгадайте случайное число от 0 до {maxvalue}");
-            string variant = (Console.ReadLine());
-            int userinput = int.Parse($"{variant}");
+            int variant;
+            string userinput;
             while (true)
             {
-
-                if (variant == " ")
+                userinput = Console.ReadLine();
+                if (userinput == "")
                 {
                     break;
                 }
-                else if (userinput > secretnum)
+                else
+                {
+                    variant = Convert.ToInt32(userinput);
+                }
+                    
+                if (variant > secretnum)
 
                 {
                     Console.WriteLine("Нет, загаданное число меньше");
-                    userinput = int.Parse(Console.ReadLine());
+                    /*userinput = int.Parse(Console.ReadLine());*/
                 }
 
-                else if (userinput < secretnum)
+                else if (variant < secretnum)
                 {
                     Console.WriteLine("Нет, загаданное число больше");
-                    userinput = int.Parse(Console.ReadLine());
+                    /*userinput = int.Parse(Console.ReadLine());*/
                 }
                 else
                 {
