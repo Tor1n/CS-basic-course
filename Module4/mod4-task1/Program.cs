@@ -18,7 +18,7 @@ namespace mod4_task1
 
             int[,] matrix = new int[row, col];
             Random r = new Random();
-            int summ = 0;
+            long summ = 0;
 
             for (int i = 0; i < row; i++)
             {
