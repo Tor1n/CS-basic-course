@@ -10,22 +10,36 @@ namespace module6
         {
             
             string fileName = "Сотрудники.txt";
+            int newCount;
+            if (File.Exists(fileName))
+            {
+                newCount = File.ReadAllLines(fileName).Length;
+            }
+            else
+            {
+                newCount = 0;
+            }
+
+            
             Console.WriteLine("Для просмотра данных нажмите 1, для добавления нажмите 2");
             int initKey = int.Parse(Console.ReadLine());
-            InitOption(initKey, fileName);            
+            InitOption(initKey, fileName, newCount);            
         }
-        static void WriteData(string fName)
+        static void WriteData(string fName, int count)
         {
             using (StreamWriter SWriter = new StreamWriter(fName, true, Encoding.UTF8))
             {
                 char k = 'д';
+                int c = 0; //костыль, для добавления нескольких сотрудников за 1 раз
                 do
                 {               
                 string note = string.Empty;
-                Console.Write("\nВведите ID:");
-                note += $"{Console.ReadLine()}";
 
-                string now = DateTime.Now.ToString();
+                    int intCount = count + 1 + c;
+                    string strCount = Convert.ToString(intCount);
+                    note += strCount;
+                    c++;
+                    string now = DateTime.Now.ToString();
                 note += $"#{now}";
 
                 Console.WriteLine("ФИО: ");
@@ -44,7 +58,7 @@ namespace module6
                 note += $"#город {Console.ReadLine()}";
 
                 SWriter.WriteLine(note);
-                    Console.Write("Добавить еще одну запись д/н"); k = Console.ReadKey(true).KeyChar;
+                    Console.WriteLine("Добавить еще одну запись д/н"); k = Console.ReadKey(true).KeyChar;
                 } while (char.ToLower(k) == 'д');
             }
                 
@@ -72,7 +86,7 @@ namespace module6
                 
             }
         }
-        static void InitOption(int key, string file)
+        static void InitOption(int key, string file, int nCount)
         {
             switch (key)
             {
@@ -81,12 +95,12 @@ namespace module6
                     break;
                     
                 case 2:
-                    WriteData(file);
+                    WriteData(file, nCount);
                     break;
                 default:
                     Console.WriteLine("Виберите опцию 1 или 2");
                     int initKey = int.Parse(Console.ReadLine());
-                    InitOption(initKey, file);
+                    InitOption(initKey, file, nCount);
                     break;
             }
             //if (key == 1)
