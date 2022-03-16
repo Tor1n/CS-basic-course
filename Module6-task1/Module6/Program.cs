@@ -8,13 +8,15 @@ namespace module6
     {
         static void Main (string[] args)
         {
+            
+            string fileName = "Сотрудники.txt";
             Console.WriteLine("Для просмотра данных нажмите 1, для добавления нажмите 2");
             int initKey = int.Parse(Console.ReadLine());
-            InitOption(initKey);            
+            InitOption(initKey, fileName);            
         }
-        static void WriteData()
+        static void WriteData(string fName)
         {
-            using (StreamWriter SWriter = new StreamWriter(@"f:\Igor\Сотрудники.txt", true, Encoding.UTF8))
+            using (StreamWriter SWriter = new StreamWriter(fName, true, Encoding.UTF8))
             {
                 char k = 'д';
                 do
@@ -47,37 +49,60 @@ namespace module6
             }
                 
         }
-        static void ReadData()
+        static void ReadData(string fName)
         {
-            using (StreamReader SRead = new StreamReader(@"f:\Igor\Сотрудники.txt", Encoding.UTF8))
+            if (File.Exists(fName))
+            {
+            using (StreamReader SRead = new StreamReader(fName, Encoding.UTF8))
             {
                 string line;
                 Console.WriteLine($"{"ID",2}{" Добавлено",11}{" ФИО",16}");
 
-                while ((line = SRead.ReadLine()) != null )
+                while ((line = SRead.ReadLine()) != null)
                 {
                     string[] data = line.Split('#');
                     Console.WriteLine($"{data[0],2} {data[1],20} {data[2],14}" +
                         $" {data[3]} {data[4]} {data[5]} {data[6]}");
                 }
             }
+            }
+            else
+            {
+                Console.WriteLine("Файла не существует.");
+                
+            }
         }
-        static void InitOption(int key)
+        static void InitOption(int key, string file)
         {
-            if (key == 1)
+            switch (key)
             {
-                ReadData();
+                case 1:
+                    ReadData(file);
+                    break;
+                    
+                case 2:
+                    WriteData(file);
+                    break;
+                default:
+                    Console.WriteLine("Виберите опцию 1 или 2");
+                    int initKey = int.Parse(Console.ReadLine());
+                    InitOption(initKey, file);
+                    break;
             }
-            else if (key == 2)
-            {
-                WriteData();
-            }
-            else 
-            {
-                Console.WriteLine("Виберите опцию 1 или 2");
-                int initKey = int.Parse(Console.ReadLine());
-                InitOption(initKey);
-            }
+            //if (key == 1)
+            //{
+            //    ReadData();
+            //}
+            //else if (key == 2)
+            //{
+            //    WriteData(file);
+            //}
+            //else 
+            //{
+            //    Console.WriteLine("Виберите опцию 1 или 2");
+            //    int initKey = int.Parse(Console.ReadLine());
+            //    InitOption(initKey, file);
+            //}
         }
-    }
+    } 
 }
