@@ -8,7 +8,7 @@ namespace module6
     {
         static void Main(string[] args)
         {
-
+            
             string fileName = "Сотрудники.txt";
             //int newCount;
             //if (File.Exists(fileName))
@@ -19,7 +19,7 @@ namespace module6
             //{
             //    newCount = 0;
             //}
-
+            
 
             Console.WriteLine("Для просмотра данных нажмите 1, для добавления нажмите 2");
             int initKey = int.Parse(Console.ReadLine());
@@ -78,12 +78,14 @@ namespace module6
                 {
                     string line;
                     Console.WriteLine($"{"ID",2}{" Добавлено",11}{" ФИО",16}");
-
+                    int i = 0;
                     while ((line = SRead.ReadLine()) != null)
                     {
                         string[] data = line.Split('#');
                         Console.WriteLine($"{data[0],2} {data[1],20} {data[2],14}" +
                             $" {data[3]} {data[4]} {data[5]} {data[6]}");
+                        string[] Worker = new string[] {data[0], data[1], data[2], data[3], data[4], data[5], data[6] };
+                        
                     }
                 }
             }
