@@ -23,8 +23,8 @@ namespace Mod7Template
             
             Repository rep = new Repository(path); //Заносим данные из файла в буфер
 
-            Console.Write("Выбирите действие:\n1.Просмотр данных\n2.Добавление новой записи\n" +
-                "3.Редактирование записи по ID\n");
+            Console.WriteLine("Выбирите действие:\n1.Просмотр данных\n2.Добавление новой записи\n" +
+                "3.Редактирование записи по ID\n4.Cортировать по дате рождения\n5.Cортировать по дате добавления");
 
             int key = int.Parse(Console.ReadLine());
             switch (key)
@@ -46,6 +46,7 @@ namespace Mod7Template
                     string newPlace = Console.ReadLine();
 
                     rep.Add(new Worker((uint)rep.Count, DateTime.Now, newName, newAge, newHeight, newBirthDate, newPlace));
+                    Console.Write("Запись добавлена");
                     break;
                 case 3: //Редактируем запись по ID
                     Console.WriteLine("Укажите ID сотрудника, данные которого необходимо отредактировать: ");
@@ -90,6 +91,12 @@ namespace Mod7Template
                             break;
                     }
 
+                    break;
+                case 4:
+                    rep.SortByBDate();
+                    break;
+                case 5:
+                    rep.SortByDateAdded();
                     break;
                 default:
                     break;

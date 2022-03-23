@@ -155,5 +155,39 @@ namespace Mod7Template
         /// Количество сотрудников в хранилище
         /// </summary>
         public int Count { get { return this.index; } }
+
+        public void SortByBDate() 
+        {
+            var people = workers;
+            
+            // с помощью оператора orderby
+            var sortedPeople1 = from p in people
+                                orderby p.BirthDate
+                                select p;
+
+            foreach (var p in sortedPeople1)
+                Console.WriteLine($"ID:{p.ID} Родился:{p.BirthDate} - {p.FullName} - Рост: {p.Height}");
+
+            // с помощью метода OrderBy
+            //var sortedPeople2 = people.OrderBy(p => p.Name);
+
+            //foreach (var p in sortedPeople2)
+            //    Console.WriteLine($"{p.Name} - {p.Age}");
+        }
+        public void SortByDateAdded()
+        {
+            var people = workers;
+
+            // с помощью оператора orderby
+            var sortedPeople1 = from p in people
+                                orderby p.AddDate
+                                select p;
+
+            foreach (var p in sortedPeople1)
+                Console.WriteLine($"ID:{p.ID} Добавлен {p.AddDate} Возраст:{p.Age} - {p.FullName} - Рост: {p.Height}");
+
+
+        }
+
     }
 }
