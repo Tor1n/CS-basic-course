@@ -110,7 +110,42 @@ namespace Mod7Template
                File.AppendAllText(Path, $"{temp}\n");
             }
         }
+        public void DeletionSave(string Path, uint j) //Принимает так же индекс который нужно исключить из файла
+        {
+            //string temp = String.Format("{0}{1}{2}{3}{4}{5}{6}",
+            //                                this.titles[0],
+            //                                this.titles[1],
+            //                                this.titles[2],
+            //                                this.titles[3],
+            //                                this.titles[4],
+            //                                this.titles[5],
+            //                                this.titles[6]);
 
+            //File.AppendAllText(Path, $"{temp}\n");
+            File.Delete(Path);
+
+            for (int i = 0; i < this.index; i++)
+            {
+                if (i == j)
+                {
+                    continue;
+                }
+                else
+                {
+                    
+                    string temp = String.Format("{0}#{1}#{2}#{3}#{4}#{5}#{6}",
+                                         this.workers[i].ID, //new Worker((uint)rep.Count
+                                         this.workers[i].AddDate,
+                                         this.workers[i].FullName,
+                                         this.workers[i].Age,
+                                         this.workers[i].Height,
+                                         this.workers[i].BirthDate,
+                                         this.workers[i].BirthPlace);
+                    File.AppendAllText(Path, $"{temp}\n");
+                }
+                
+            }
+        }
         /// <summary>
         /// Вывод данных в консоль
         /// </summary>
@@ -122,12 +157,25 @@ namespace Mod7Template
                 Console.WriteLine(this.workers[i].Print());
             }
         }
+        public void PrintDbByPeriod(DateTime From, DateTime Till)
+        {            
+            //Console.WriteLine($"{this.titles[0],15} {this.titles[1],15} {this.titles[2],15} {this.titles[3],15} {this.titles[4],10}{this.titles[5],10}{this.titles[6],10}");
+            for (int i = 0; i < index; i++)
+            {
+                if (workers[i].AddDate > From && Till > workers[i].AddDate)
+                {
+                    Console.WriteLine(this.workers[i].Print());
+                }
+                
+            }
+        }
         public void PrintDataByID(int i)
         {
             //Console.WriteLine($"{this.titles[0],15} {this.titles[1],15} {this.titles[2],15} {this.titles[3],15} {this.titles[4],10}{this.titles[5],10}{this.titles[6],10}");
             Console.WriteLine(this.workers[i].Print());
             
         }
+
         public void EditName(int i, string n)
         {
             workers[i].FullName = n;
