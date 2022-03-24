@@ -12,14 +12,14 @@ namespace Mod7Template
         static void Main(string[] args)
         {
             string path = @"Сотрудники.txt";
-
-            if (!File.Exists(path)) //Создаем дефолтный файл в случае отсутсвия
-            {
-                using (File.Create(path));
-                File.AppendAllText(path, "0#23.03.2022 18:41:08#Илья Щербин#41#185#18.11.1981#Севастополь\n" +
-                    "1#20.12.2021 00:12#Иванов Иван Иванович#30#176#05.05.1992#Москва\n" +
-                    "2#15.12.2021 03:12#Алексеев Алексей Иванович#44#176#05.11.1980#Томск\n");
-            }
+            Check(path);
+            //if (!File.Exists(path)) //Создаем дефолтный файл в случае отсутсвия
+            //{
+            //    using (File.Create(path));
+            //    File.AppendAllText(path, "0#23.03.2022 18:41:08#Илья Щербин#41#185#18.11.1981#Севастополь\n" +
+            //        "1#20.12.2021 00:12#Иванов Иван Иванович#30#176#05.05.1992#Москва\n" +
+            //        "2#15.12.2021 03:12#Алексеев Алексей Иванович#44#176#05.11.1980#Томск\n");
+            //}
             
             Repository rep = new Repository(path); //Заносим данные из файла в буфер
             Action(rep);
@@ -127,13 +127,13 @@ namespace Mod7Template
 
             Console.ReadKey();
         }
-        static void Action(Repository rep)
+        static void Action(Repository rep) //Метод вырора действия пользователем
         {
             Console.WriteLine("Выбирите действие:\n1.Просмотр данных\n2.Добавление новой записи\n" +
                 "3.Редактирование записи по ID\n4.Cортировать по дате рождения\n5.Cортировать по дате добавления\n" +
                 "6.Записи добавленные за период\n7.Удаление записи по ID");
-            int key = int.Parse(Console.ReadLine());
 
+            int key = int.Parse(Console.ReadLine());
             switch (key)
             {
                 case 1: //Выводим все данные из буфера на экран
@@ -200,30 +200,43 @@ namespace Mod7Template
 
                     break;
                 case 4:
-                    rep.SortByBDate();
+                    rep.SortByBDate(); //Сортировка по дате рождения
                     break;
                 case 5:
-                    rep.SortByDateAdded();
+                    rep.SortByDateAdded(); //Сортировка по дате добавления
                     break;
                 case 6:
                     Console.WriteLine("Дата от которой вывести записи: ");
                     DateTime from = DateTime.Parse(Console.ReadLine());
                     Console.WriteLine("Дата до которой вывести записи: ");
                     DateTime till = DateTime.Parse(Console.ReadLine());
-                    rep.PrintDbByPeriod(from, till);
+                    rep.PrintDbByPeriod(from, till); //Вывод записей добавленных за период
                     break;
                 case 7:
                     rep.PrintDbToConsole();
                     Console.WriteLine("введите ID записи которую необходимо удалить:");
-
                     break;
                 default:
                     break;
             }
+            Finish(key, rep);
+            //if (key == 7)
+            //{
+            //    uint delindex = uint.Parse(Console.ReadLine());
+            //    rep.DeletionSave("Сотрудники.txt", delindex);
+            //    Console.WriteLine("Запить успешно удалена.");
+            //}
+            //else
+            //{
+            //    rep.Save("Сотрудники.txt");
+            //}
+        }
+        static void Finish(int key, Repository rep)
+        {
             if (key == 7)
             {
-                uint delindex = uint.Parse(Console.ReadLine());
-                rep.DeletionSave("Сотрудники.txt", delindex);
+                uint delIndex = uint.Parse(Console.ReadLine());
+                rep.DeletionSave("Сотрудники.txt", delIndex);
                 Console.WriteLine("Запить успешно удалена.");
             }
             else
@@ -231,15 +244,15 @@ namespace Mod7Template
                 rep.Save("Сотрудники.txt");
             }
         }
-        //static void Check(string path)
-        //{
-        //    if (!File.Exists(path)) //Создаем дефолтный файл в случае отсутсвия
-        //    {
-        //        using (File.Create(path));
-        //        File.AppendAllText(path, "0#23.03.2022 18:41:08#Илья Щербин#41#185#18.11.1981#Севастополь\n" +
-        //            "1#20.12.2021 00:12#Иванов Иван Иванович#30#176#05.05.1992#Москва\n" +
-        //            "2#15.12.2021 03:12#Алексеев Алексей Иванович#44#176#05.11.1980#Томск\n");
-        //    }
-        //}
+        static void Check(string path)
+        {
+            if (!File.Exists(path)) //Создаем дефолтный файл в случае отсутсвия
+            {
+                using (File.Create(path)) ;
+                File.AppendAllText(path, "0#23.03.2022 18:41:08#Илья Щербин#41#185#18.11.1981#Севастополь\n" +
+                    "1#20.12.2021 00:12#Иванов Иван Иванович#30#176#05.05.1992#Москва\n" +
+                    "2#15.12.2021 03:12#Алексеев Алексей Иванович#44#176#05.11.1980#Томск\n");
+            }
+        }
     }
 }
