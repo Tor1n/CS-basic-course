@@ -204,7 +204,7 @@ namespace Mod7Template
         /// </summary>
         public int Count { get { return this.index; } }
 
-        public void SortByBDate() 
+        public void SortByBDate() //Сортировка по дате рождения
         {
             var people = workers;
             
@@ -221,8 +221,8 @@ namespace Mod7Template
 
             //foreach (var p in sortedPeople2)
             //    Console.WriteLine($"{p.Name} - {p.Age}");
-        }
-        public void SortByDateAdded()
+        } 
+        public void SortByDateAdded() //Сортировка по дате добавления
         {
             var people = workers;
 
