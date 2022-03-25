@@ -14,10 +14,11 @@ namespace Mod7Template
             string path = @"Сотрудники.txt";
             Check(path);
             Repository rep = new Repository(path); //Заносим данные из файла в буфер
-            Action(rep);
+            
+            Action(path, rep);
             Console.ReadKey();
         }
-        static void Action(Repository rep) //Метод вырора действия пользователем
+        static void Action(string path, Repository rep) //Метод вырора действия пользователем
         {
             Console.WriteLine("Выбирите действие:\n1.Просмотр данных\n2.Добавление новой записи\n" +
                 "3.Редактирование записи по ID\n4.Дата добаления по убыванию\n5.Дата добавления по возрастанию\n" +
@@ -31,19 +32,25 @@ namespace Mod7Template
                     Console.WriteLine($"Записей в файле: {rep.Count}");
                     break;
                 case 2: //Добавляем новую запись
-                    Console.Write("Имя: ");
-                    string newName = Console.ReadLine();
-                    Console.Write("Возраст: ");
-                    uint newAge = uint.Parse(Console.ReadLine());
-                    Console.Write("Рост: ");
-                    uint newHeight = uint.Parse(Console.ReadLine());
-                    Console.Write("Дата Рождения: ");
-                    DateTime newBirthDate = DateTime.Parse(Console.ReadLine());
-                    Console.Write("Место Рождения: ");
-                    string newPlace = Console.ReadLine();
 
-                    rep.Add(new Worker((uint)rep.Count, DateTime.Now, newName, newAge, newHeight, newBirthDate, newPlace));
-                    Console.Write("Запись добавлена");
+                    char k = 'д';
+                    do
+                    {
+                        Console.Write("Имя: ");
+                        string newName = Console.ReadLine();
+                        Console.Write("Возраст: ");
+                        uint newAge = uint.Parse(Console.ReadLine());
+                        Console.Write("Рост: ");
+                        uint newHeight = uint.Parse(Console.ReadLine());
+                        Console.Write("Дата Рождения: ");
+                        DateTime newBirthDate = DateTime.Parse(Console.ReadLine());
+                        Console.Write("Место Рождения: ");
+                        string newPlace = Console.ReadLine();
+
+                        rep.Add(new Worker((uint)rep.Count, DateTime.Now, newName, newAge, newHeight, newBirthDate, newPlace));
+                        Console.WriteLine("Запись добавлена. Желаете добавить еще одну? д/н");
+                        k = Console.ReadKey(true).KeyChar;
+                    } while (char.ToLower(k) == 'д');
                     break;
                 case 3: //Редактируем запись по ID
                     Console.WriteLine("Укажите ID сотрудника, данные которого необходимо отредактировать: ");
@@ -127,15 +134,14 @@ namespace Mod7Template
                 rep.Save("Сотрудники.txt");
             }
         }
-        static void Check(string path) //Создаем дефолтный файл в случае отсутсвия
+        static void Check(string path) //При отсутсвии файла просим добавить сотрудника
         {
             if (!File.Exists(path)) 
             {
-                using (File.Create(path)) ;
-                File.AppendAllText(path, "0#23.03.2022 18:41:08#Илья Щербин#41#185#18.11.1981#Севастополь\n" +
-                    "1#20.12.2021 00:12#Иванов Иван Иванович#30#176#05.05.1992#Москва\n" +
-                    "2#15.12.2021 03:12#Алексеев Алексей Иванович#44#176#05.11.1980#Томск\n");
+                Console.WriteLine("В файле еще нет данных, для добавления сотрудника нажмите 2\n");                
+                using (File.Create(path));
             }
+
         }
     }
 }
