@@ -65,9 +65,6 @@ namespace Mod7Template
         {
             using (StreamReader sr = new StreamReader(this.path))
             {
-                //titles = sr.ReadLine().Split('#');
-
-
                 while (!sr.EndOfStream)
                 {
                     string[] args = sr.ReadLine().Split('#');
@@ -85,16 +82,6 @@ namespace Mod7Template
         /// <param name="Path">Путь к файлу сохранения</param>
         public void Save(string Path)
         {
-            //string temp = String.Format("{0}{1}{2}{3}{4}{5}{6}",
-            //                                this.titles[0],
-            //                                this.titles[1],
-            //                                this.titles[2],
-            //                                this.titles[3],
-            //                                this.titles[4],
-            //                                this.titles[5],
-            //                                this.titles[6]);
-
-            //File.AppendAllText(Path, $"{temp}\n");
             File.Delete(Path);
 
             for (int i = 0; i < this.index; i++)
@@ -112,16 +99,6 @@ namespace Mod7Template
         }
         public void DeletionSave(string Path, uint j) //Принимает так же индекс который нужно исключить из файла
         {
-            //string temp = String.Format("{0}{1}{2}{3}{4}{5}{6}",
-            //                                this.titles[0],
-            //                                this.titles[1],
-            //                                this.titles[2],
-            //                                this.titles[3],
-            //                                this.titles[4],
-            //                                this.titles[5],
-            //                                this.titles[6]);
-
-            //File.AppendAllText(Path, $"{temp}\n");
             File.Delete(Path);
 
             for (int i = 0; i < this.index; i++)
@@ -134,7 +111,7 @@ namespace Mod7Template
                 {
                     
                     string temp = String.Format("{0}#{1}#{2}#{3}#{4}#{5}#{6}",
-                                         this.workers[i].ID, //new Worker((uint)rep.Count
+                                         this.workers[i].ID, 
                                          this.workers[i].AddDate,
                                          this.workers[i].FullName,
                                          this.workers[i].Age,
@@ -150,8 +127,7 @@ namespace Mod7Template
         /// Вывод данных в консоль
         /// </summary>
         public void PrintDbToConsole()
-        {
-            //Console.WriteLine($"{this.titles[0],15} {this.titles[1],15} {this.titles[2],15} {this.titles[3],15} {this.titles[4],10}{this.titles[5],10}{this.titles[6],10}");
+        {            
             for (int i = 0; i < index; i++)
             {
                 Console.WriteLine(this.workers[i].Print());
@@ -159,7 +135,6 @@ namespace Mod7Template
         }
         public void PrintDbByPeriod(DateTime From, DateTime Till)
         {            
-            //Console.WriteLine($"{this.titles[0],15} {this.titles[1],15} {this.titles[2],15} {this.titles[3],15} {this.titles[4],10}{this.titles[5],10}{this.titles[6],10}");
             for (int i = 0; i < index; i++)
             {
                 if (workers[i].AddDate > From && Till > workers[i].AddDate)
@@ -171,9 +146,7 @@ namespace Mod7Template
         }
         public void PrintDataByID(int i)
         {
-            //Console.WriteLine($"{this.titles[0],15} {this.titles[1],15} {this.titles[2],15} {this.titles[3],15} {this.titles[4],10}{this.titles[5],10}{this.titles[6],10}");
-            Console.WriteLine(this.workers[i].Print());
-            
+            Console.WriteLine(this.workers[i].Print());            
         }
 
         public void EditName(int i, string n)
@@ -207,28 +180,30 @@ namespace Mod7Template
         public void SortByBDate() //Сортировка по дате рождения
         {
             var people = workers;
-            
-            // с помощью оператора orderby
             var sortedPeople1 = from p in people
                                 orderby p.BirthDate
                                 select p;
 
             foreach (var p in sortedPeople1)
                 Console.WriteLine($"ID:{p.ID} Родился:{p.BirthDate} - {p.FullName} - Рост: {p.Height}");
-
-            // с помощью метода OrderBy
-            //var sortedPeople2 = people.OrderBy(p => p.Name);
-
-            //foreach (var p in sortedPeople2)
-            //    Console.WriteLine($"{p.Name} - {p.Age}");
         } 
         public void SortByDateAdded() //Сортировка по дате добавления
         {
             var people = workers;
-
-            // с помощью оператора orderby
             var sortedPeople1 = from p in people
                                 orderby p.AddDate
+                                select p;
+
+            foreach (var p in sortedPeople1)
+                Console.WriteLine($"ID:{p.ID} Добавлен {p.AddDate} Возраст:{p.Age} - {p.FullName} - Рост: {p.Height}");
+
+
+        }
+        public void SortByDateAddedDes() //Сортировка по дате добавления
+        {
+            var people = workers;
+            var sortedPeople1 = from p in people
+                                orderby p.AddDate descending
                                 select p;
 
             foreach (var p in sortedPeople1)

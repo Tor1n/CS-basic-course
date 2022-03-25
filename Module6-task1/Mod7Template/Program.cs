@@ -20,8 +20,8 @@ namespace Mod7Template
         static void Action(Repository rep) //Метод вырора действия пользователем
         {
             Console.WriteLine("Выбирите действие:\n1.Просмотр данных\n2.Добавление новой записи\n" +
-                "3.Редактирование записи по ID\n4.Cортировать по дате рождения\n5.Cортировать по дате добавления\n" +
-                "6.Записи добавленные за период\n7.Удаление записи по ID");
+                "3.Редактирование записи по ID\n4.Дата добаления по убыванию\n5.Дата добавления по возрастанию\n" +
+                "6.Записи добавленные за период\n7.Удаление записи по ID\n8.Cортировать по дате рождения");
 
             int key = int.Parse(Console.ReadLine());
             switch (key)
@@ -90,10 +90,10 @@ namespace Mod7Template
 
                     break;
                 case 4:
-                    rep.SortByBDate(); //Сортировка по дате рождения
+                    rep.SortByDateAddedDes(); //Сортировка по дате добавления по убыванию
                     break;
                 case 5:
-                    rep.SortByDateAdded(); //Сортировка по дате добавления
+                    rep.SortByDateAdded(); //Сортировка по дате добавления по возрастанию
                     break;
                 case 6:
                     Console.WriteLine("Дата от которой вывести записи: ");
@@ -105,6 +105,9 @@ namespace Mod7Template
                 case 7:
                     rep.PrintDbToConsole();
                     Console.WriteLine("введите ID записи которую необходимо удалить:");
+                    break;
+                case 8:
+                    rep.SortByBDate(); //Сортировка по дате рождения
                     break;
                 default:
                     break;
